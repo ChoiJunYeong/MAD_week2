@@ -6,8 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".BoardActivity">
 
-    <WebView
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_menu_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/boardView"/>
+        android:id="@+id/boardLayout"/>
 </android.support.constraint.ConstraintLayout>
