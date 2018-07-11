@@ -73,18 +73,15 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Member;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main2Activity extends AppCompatActivity {
 
-<<<<<<< HEAD
     public RequestQueue queue;
-    int REQ_CODE_UPLOAD=2;
-=======
     private final int REQ_CODE_UPLOAD=2;
->>>>>>> dd182d6cb956030391fc07e8e678d6d32ac19ebc
     private ListView lv;
     private String searchKeyword;
     private ArrayList<Member> data;
@@ -102,21 +99,16 @@ public class Main2Activity extends AppCompatActivity {
 
         facebookLogIn();
 
-       myProfile();
 
         images = new ArrayList<>();
         _ids = new ArrayList<>();
-<<<<<<< HEAD
         //new loadGallery().execute();
 
         queue = Volley.newRequestQueue(this);
 
-        queue.add(new GalleryActivity().loadGallery((ImageView) findViewById(R.id.testImage)));
-/*        myProfile();
-=======
-        setGalleryAdapter();
+      //  queue.add(new GalleryActivity().uploadBitmap(null,(ImageView) findViewById(R.id.testImage)));
         myProfile();
->>>>>>> dd182d6cb956030391fc07e8e678d6d32ac19ebc
+        myProfile();
 
         try {
             EditText searchBox = (EditText) findViewById(R.id.search_box);
