@@ -92,6 +92,7 @@ public class Main2Activity extends AppCompatActivity {
     private  ListviewAdapter adapter;
     private final int CAMERA_CODE = 1111;
     private final int GALLERY_CODE = 1112;
+    int width;
     Socket socket;
 
     @Override
@@ -103,9 +104,6 @@ public class Main2Activity extends AppCompatActivity {
 
         facebookLogIn();
 
-
-        images = new ArrayList<>();
-        _ids = new ArrayList<>();
 
         queue = Volley.newRequestQueue(this);
         myProfile();
@@ -134,13 +132,11 @@ public class Main2Activity extends AppCompatActivity {
             } catch (Exception e) {
             Log.e("", e.getMessage(), e);
             }
+
         GalleryActivity galleryActivity = new GalleryActivity();
-
-
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int width = displayMetrics.widthPixels;
+        width = displayMetrics.widthPixels;
 
         LinearLayout listView = findViewById(R.id.galleryListView);
         galleryActivity.getImageList(queue,listView,(Activity)this,width);
@@ -153,7 +149,6 @@ public class Main2Activity extends AppCompatActivity {
 
     public void setTablayout(){
         TabLayout tabLayout = findViewById(R.id.tabs);
-        findViewById(R.id.boardLayout).setVisibility(View.GONE);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -174,6 +169,7 @@ public class Main2Activity extends AppCompatActivity {
                         });
                         break;
                     case 2:
+                        findViewById(R.id.galleryListView).setVisibility(View.VISIBLE);
                         break;
                 }
             }
@@ -193,6 +189,7 @@ public class Main2Activity extends AppCompatActivity {
                         findViewById(R.id.boardLayout).setVisibility(View.GONE);
                         break;
                     case 2:
+                        findViewById(R.id.galleryListView).setVisibility(View.GONE);
                         break;
                 }
             }
@@ -694,9 +691,6 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
-
-    ArrayList<Bitmap> images;
-    ArrayList<String> _ids;
 
     public void loadBoard(){
         final ArrayList<String[]> post_data_list;
