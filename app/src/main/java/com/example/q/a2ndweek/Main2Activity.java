@@ -103,6 +103,7 @@ public class Main2Activity extends AppCompatActivity {
     private  ListviewAdapter adapter;
     private final int CAMERA_CODE = 1111;
     private final int GALLERY_CODE = 1112;
+    private final int REQ_CODE_POST = 33;
     int width;
     private Uri photoUri;
     private String currentPhotoPath;//실제 사진 파일 경로
@@ -178,6 +179,7 @@ public class Main2Activity extends AppCompatActivity {
                         loadBoard();
                         findViewById(R.id.boardLayout).setVisibility(View.VISIBLE);
                         FloatingActionButton fab = findViewById(R.id.fab);
+                        fab.setVisibility(View.VISIBLE);
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -189,6 +191,10 @@ public class Main2Activity extends AppCompatActivity {
                         break;
                     case 2:
                         findViewById(R.id.galleryListView).setVisibility(View.VISIBLE);
+                        LinearLayout listView = findViewById(R.id.galleryListView);
+                        listView.removeAllViews();
+                        GalleryActivity galleryActivity = new GalleryActivity();
+                        galleryActivity.getImageList(queue,listView,(Activity)mContext,width);
                         break;
                 }
             }
@@ -206,6 +212,7 @@ public class Main2Activity extends AppCompatActivity {
                         break;
                     case 1:
                         findViewById(R.id.boardLayout).setVisibility(View.GONE);
+                        findViewById(R.id.fab).setVisibility(View.GONE);
                         break;
                     case 2:
                         findViewById(R.id.galleryListView).setVisibility(View.GONE);
@@ -500,8 +507,6 @@ public class Main2Activity extends AppCompatActivity {
     private void uploadBitmap(final Bitmap bitmap) {
 
         //getting the tag from the edittext
-        final String tags = "x";
-
         //our custom volley request
         AndroidMultiPartEntity volleyMultipartRequest = new AndroidMultiPartEntity(Request.Method.POST, EndPoints.UPROAD_PROFILE_PIC,
                 new Response.Listener<NetworkResponse>() {
@@ -682,12 +687,12 @@ public class Main2Activity extends AppCompatActivity {
 
                 case REQ_CODE_UPLOAD:
                     Log.d("REQ","OK");
-                    if(resultCode== Activity.RESULT_OK) {
-                        Log.d("RESULT","OK");
-                        loadBoard();
-                    }
+                    loadBoard();
                     break;
-
+                case REQ_CODE_POST:
+                    Log.d("REQ","OK");
+                    loadBoard();
+                    break;
                 default:
                     System.out.println("불가능한 접근\n");
                     break;
@@ -904,7 +909,7 @@ public class Main2Activity extends AppCompatActivity {
                                     String post_id = (String) view.getTag();
                                     Intent intent = new Intent(getApplicationContext(), PostActivity.class);
                                     intent.putExtra("_id", post_id);
-                                    startActivity(intent);
+                                    startActivityForResult(intent,REQ_CODE_POST);
                                 }
                             });
                         }
