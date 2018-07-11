@@ -103,6 +103,7 @@ public class Main2Activity extends AppCompatActivity {
     private  ListviewAdapter adapter;
     private final int CAMERA_CODE = 1111;
     private final int GALLERY_CODE = 1112;
+    private final int REQ_CODE_POST = 33;
     int width;
     private Uri photoUri;
     private String currentPhotoPath;//실제 사진 파일 경로
@@ -693,12 +694,12 @@ public class Main2Activity extends AppCompatActivity {
 
                 case REQ_CODE_UPLOAD:
                     Log.d("REQ","OK");
-                    if(resultCode== Activity.RESULT_OK) {
-                        Log.d("RESULT","OK");
-                        loadBoard();
-                    }
+                    loadBoard();
                     break;
-
+                case REQ_CODE_POST:
+                    Log.d("REQ","OK");
+                    loadBoard();
+                    break;
                 default:
                     System.out.println("불가능한 접근\n");
                     break;
@@ -915,7 +916,7 @@ public class Main2Activity extends AppCompatActivity {
                                     String post_id = (String) view.getTag();
                                     Intent intent = new Intent(getApplicationContext(), PostActivity.class);
                                     intent.putExtra("_id", post_id);
-                                    startActivity(intent);
+                                    startActivityForResult(intent,REQ_CODE_POST);
                                 }
                             });
                         }
